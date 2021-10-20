@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadAssembly", "LoadAssembly\LoadAssembly.csproj", "{CFE727C4-FD16-436A-A5D4-6900E77AF305}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogBuffer", "LogBuffer\LogBuffer.csproj", "{B14F7F17-FADE-4628-93D1-F2E9276075ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFE727C4-FD16-436A-A5D4-6900E77AF305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFE727C4-FD16-436A-A5D4-6900E77AF305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFE727C4-FD16-436A-A5D4-6900E77AF305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFE727C4-FD16-436A-A5D4-6900E77AF305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B14F7F17-FADE-4628-93D1-F2E9276075ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B14F7F17-FADE-4628-93D1-F2E9276075ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B14F7F17-FADE-4628-93D1-F2E9276075ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B14F7F17-FADE-4628-93D1-F2E9276075ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C00762E-ABBD-49F6-B84F-F9D29F60485F}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+﻿namespace LogBuffer
+{
+    class LogBuffer
+    {
+    }
+}
