@@ -40,6 +40,8 @@ namespace LoadAssembly
             result = PublicMethods
                .OrderBy(method => method.Split(" ")[1])
                .Aggregate(result, (current, strMethod) => current + $"\tpublic method {strMethod}\n");
+            result = PublicOther
+                .Aggregate(result, (current, strOther) => current + $"\tpublic {strOther}\n");
 
             return result;
         }

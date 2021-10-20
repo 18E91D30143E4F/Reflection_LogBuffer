@@ -27,7 +27,7 @@ namespace LoadAssembly
                 var typeInfo = new ClassInfo
                 {
                     ClassName = type.Name,
-                    Namespace = type.Namespace ?? "NotFound"
+                    Namespace = type.Namespace ?? "Not identified"
                 };
 
                 foreach (var memberInfo in type.GetMembers())
@@ -41,6 +41,10 @@ namespace LoadAssembly
                         else if ((memberInfo.MemberType & MemberTypes.Method) != 0)
                         {
                             typeInfo.PublicMethods.Add($"{memberInfo}");
+                        }
+                        else
+                        {
+                            typeInfo.PublicOther.Add($"{memberInfo.MemberType} {memberInfo}");
                         }
                     }
                 }

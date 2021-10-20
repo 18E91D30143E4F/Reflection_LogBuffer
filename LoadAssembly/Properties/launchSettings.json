@@ -2,7 +2,7 @@
   "profiles": {
     "LoadAssembly": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\3.1.20\\System.IO.Compression.dll\""
+      "commandLineArgs": "\"C:\\Users\\belty\\OneDrive\\Документы\\StudyBSUIR\\5 semester\\СПП\\3\\Reflection_LogBuffer\\LoadAssembly\\bin\\Release\\netcoreapp3.1\\TestFiles\\LoadAssembly.dll\""
     }
   }
 }
