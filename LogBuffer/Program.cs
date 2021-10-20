@@ -6,7 +6,15 @@ namespace LogBuffer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using (var logBuffer = new LogBuffer("data.txt"))
+            {
+                var str = Console.ReadLine();
+                while (str != ".")
+                {
+                    logBuffer.Add(str);
+                    str = Console.ReadLine();
+                }
+            }
         }
     }
 }

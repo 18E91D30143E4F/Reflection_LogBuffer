@@ -34,17 +34,17 @@ namespace LoadAssembly
                 {
                     if (memberInfo.DeclaringType.IsPublic)
                     {
-                        if ((memberInfo.MemberType & MemberTypes.Property) != 0)
+                        switch (memberInfo.MemberType)
                         {
-                            typeInfo.PublicProperties.Add($"{memberInfo}");
-                        }
-                        else if ((memberInfo.MemberType & MemberTypes.Method) != 0)
-                        {
-                            typeInfo.PublicMethods.Add($"{memberInfo}");
-                        }
-                        else
-                        {
-                            typeInfo.PublicOther.Add($"{memberInfo.MemberType} {memberInfo}");
+                            case MemberTypes.Method:
+                                typeInfo.PublicMethods.Add($"{memberInfo}");
+                                break;
+                            case MemberTypes.Property:
+                                typeInfo.PublicProperties.Add($"{memberInfo}");
+                                break;
+                            default:
+                                typeInfo.PublicOther.Add($"{memberInfo.MemberType} {memberInfo}");
+                                break;
                         }
                     }
                 }
