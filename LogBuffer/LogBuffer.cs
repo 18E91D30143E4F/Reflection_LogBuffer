@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -12,18 +11,23 @@ namespace LogBuffer
     public class LogBuffer : IDisposable
     {
         public string PathToFile { get; set; }
+        public int IterateTime { get; set; } = 5000; // milliseconds
+        public int MaxBufferSize { get; set; } = 5;
 
         private readonly StreamWriter _streamWriter;
-        private ObservableCollection<string> _buffer;
-        private CancellationTokenSource _cancellationTokenSource;
-        private CancellationToken _cancellationToken;
+        private readonly ObservableCollection<string> _buffer;
+        private readonly CancellationTokenSource _cancellationTokenSource;
+        private readonly CancellationToken _cancellationToken;
+        private static readonly object Locker = new object();
 
-        private readonly int iterateTime = 5000; // milliseconds
-        private static object locker = new object();
+        public delegate void OutputFunction(string message);
+        private readonly OutputFunction _outputFunction;
 
-        public LogBuffer(string pathToFile)
+        public LogBuffer(string pathToFile, OutputFunction outputFunction)
         {
-            PathToFile = pathToFile;
+            PathToFile = Path.GetFullPath(pathToFile);
+
+            _outputFunction = outputFunction;
 
             _streamWriter = new StreamWriter(pathToFile, append: true, Encoding.Default);
             _buffer = new ObservableCollection<string>();
@@ -41,26 +45,31 @@ namespace LogBuffer
 
         private void Buffer_Changed(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (_buffer.Count != 10) return;
+            if (_buffer.Count != MaxBufferSize) return;
             foreach (var line in _buffer)
             {
                 _streamWriter.WriteLine(line);
             }
             _buffer.Clear();
+            _outputFunction("Data write to file max buffer size");
         }
 
         private void WriteByTime()
         {
             while (!_cancellationToken.IsCancellationRequested)
             {
-                Thread.Sleep(iterateTime);
-                lock (locker)
+                Thread.Sleep(IterateTime);
+                lock (Locker)
                 {
-                    foreach (var line in _buffer)
+                    if (_buffer.Count != 0)
                     {
-                        _streamWriter.WriteLine(line);
+                        foreach (var line in _buffer)
+                        {
+                            _streamWriter.WriteLine(line);
+                        }
+                        _buffer.Clear();
+                        _outputFunction("\nData write to file by time");
                     }
-                    _buffer.Clear();
                 }
             }
         }
