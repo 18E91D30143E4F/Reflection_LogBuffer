@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace LogBuffer
 {
@@ -6,6 +7,11 @@ namespace LogBuffer
     {
         private const string FilePath = "data.txt";
         static void Main()
+        {
+            VersionSimple();
+        }
+
+        static void VersionSimple()
         {
             using (var logBuffer = new LogBuffer(FilePath, Console.WriteLine))
             {
