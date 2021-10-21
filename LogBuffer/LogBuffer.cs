@@ -38,13 +38,19 @@ namespace LogBuffer
             new Task(WriteByTimeAsync).Start();
         }
 
+        #region Public methods
+
         public void Add(string item) => AddToBuffer(item);
+
         public void Dispose()
         {
             _cancellationTokenSource.Cancel();
             _streamWriter.Close();
         }
 
+        #endregion
+
+        #region Private methods
         private void AddToBuffer(string item)
         {
             lock (Locker)
@@ -54,18 +60,16 @@ namespace LogBuffer
         }
 
         private async Task WriteLineAsync(string line) => await _streamWriter.WriteLineAsync(line);
+
         private async void Buffer_ChangedAsync(object sender, NotifyCollectionChangedEventArgs e)
         {
-
             if (_buffer.Count != MaxBufferSize) return;
             foreach (var line in _buffer)
             {
                 await WriteLineAsync(line);
             }
-
             _buffer.Clear();
             _outputFunction("\nData write to file max buffer size");
-
         }
 
         private async void WriteByTimeAsync()
@@ -85,6 +89,8 @@ namespace LogBuffer
                 }
             }
         }
+
+        #endregion
     }
 }
 

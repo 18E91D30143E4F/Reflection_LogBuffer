@@ -35,12 +35,15 @@ namespace LoadAssembly
             var result = $"{nameof(Namespace)}: {Namespace}\n{nameof(ClassName)}: {ClassName}\n";
 
             result = PublicProperties
-               .OrderBy(property => property.Split(" ")[1])
-               .Aggregate(result, (current, strProperty) => current + $"\tpublic property {strProperty}\n"); ;
+                .OrderBy(property => property.Split(" ")[1])
+                .Aggregate(result, (current, strProperty) => current + $"\tpublic property {strProperty}\n"); ;
+
             result = PublicMethods
-               .OrderBy(method => method.Split(" ")[1])
-               .Aggregate(result, (current, strMethod) => current + $"\tpublic method {strMethod}\n");
+                .OrderBy(method => method.Split(" ")[1])
+                .Aggregate(result, (current, strMethod) => current + $"\tpublic method {strMethod}\n");
+
             result = PublicOther
+                .OrderBy(other => other.Split(" ")[1])
                 .Aggregate(result, (current, strOther) => current + $"\tpublic {strOther}\n");
 
             return result;

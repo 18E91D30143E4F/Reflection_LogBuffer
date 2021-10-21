@@ -7,6 +7,11 @@ namespace LoadAssembly
     {
         static void Main(string[] args)
         {
+            Use(args);
+        }
+
+        static void Use(string[] args)
+        {
             if (args.Length > 0)
             {
                 var assemblyLoader = new AssemblyLoader(args[0]);
